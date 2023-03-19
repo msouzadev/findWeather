@@ -1,17 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
 import {
   Overpass_700Bold,
   Overpass_600SemiBold,
   Overpass_400Regular,
   Overpass_300Light,
-  useFonts,
 } from "@expo-google-fonts/overpass";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "@styles/theme/theme";
 import { useState, useEffect, useCallback } from "react";
+import { Router } from "src/routes/router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,7 +23,6 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync({
           Overpass_700Bold,
           Overpass_600SemiBold,
@@ -31,7 +32,6 @@ export default function App() {
       } catch (e) {
         console.warn(e);
       } finally {
-        // Tell the application to render
         setAppIsReady(true);
       }
     }
@@ -47,13 +47,16 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
+
   return (
-    <ThemeProvider theme={theme}>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer onReady={onLayoutRootView}>
+          <Router />
+          <StatusBar style="light" />
+        </NavigationContainer>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
