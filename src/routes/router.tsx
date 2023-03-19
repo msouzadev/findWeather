@@ -15,13 +15,13 @@ const HomeRoutes = () => (
   </HomeTabs.Navigator>
 );
 
-export const Router = () => (
+export const Router = ({ isFirstTimeOpen }) => (
   <HomeStack.Navigator
-    initialRouteName="Welcome"
+    initialRouteName={isFirstTimeOpen ? "Welcome" : "HomeStack"}
     screenOptions={{ headerShown: false }}
   >
     <HomeStack.Screen name="HomeStack" component={HomeRoutes} />
-    <HomeStack.Screen name="Test" component={() => <View />} />
+
     <HomeStack.Screen name="Welcome" component={Welcome} />
   </HomeStack.Navigator>
 );

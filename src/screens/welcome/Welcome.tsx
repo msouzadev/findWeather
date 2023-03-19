@@ -4,8 +4,18 @@ import Text from "@components/text/Text";
 import { Container, Heading } from "./Welcome.styles";
 import cloudAndThunderImg from "@assets/cloud-and-thunder.png";
 import Button from "@components/button/Button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { AppRoutesType } from "src/routes/routes.types";
 
 const Welcome = () => {
+  const navigation = useNavigation<AppRoutesType>();
+  const handleInit = async () => {
+    try {
+      await AsyncStorage.setItem("@findWeather:firstOpenApp", "false");
+      navigation.reset({ routes: [{ name: "HomeStack" }] });
+    } catch (error) {}
+  };
   return (
     <Container>
       <Image source={cloudAndThunderImg} />
@@ -22,7 +32,7 @@ const Welcome = () => {
         nunca {"\n"}ficou tão fácil ter a previsão do {"\n"}
         tempo na palma da sua mão
       </Text>
-      <Button title="Iniciar" style={{ marginBottom: 0 }} />
+      <Button title="Iniciar" onPress={handleInit} />
     </Container>
   );
 };
