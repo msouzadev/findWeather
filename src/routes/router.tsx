@@ -18,7 +18,7 @@ interface RouterProps {
 }
 const HomeRoutes = () => (
   <HomeTabs.Navigator
-    initialRouteName="Search"
+    initialRouteName="Home"
     screenOptions={{
       tabBarStyle: {
         borderTopWidth: 0,
