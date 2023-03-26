@@ -8,6 +8,7 @@ import AppContainer from "@components/appContainer/AppContainer";
 import { RootStack } from "src/@types/router";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import WeatherDescription from "./components/weatherDescription/WeatherDescription";
+import TodayAndNextFiveDays from "./components/todayAndNextFiveDays/TodayAndNextFiveDays";
 
 const climateChangeImg = require("@assets/climate-change.png");
 
@@ -59,56 +60,48 @@ const Home = () => {
     return <EmptyState />;
   }
   return (
-    <ScrollView
-      style={{ backgroundColor: theme.colors.dark }}
-      contentContainerStyle={{
-        flex: 1,
-        paddingHorizontal: 16,
-        paddingBottom: 30,
-      }}
-    >
-      <AppContainer>
-        <View>
-          <Text style={{ textAlign: "center" }} fontSize="sm">
-            A Coruña, Espanha
-          </Text>
-          <Text style={{ textAlign: "center" }} color="gray100" fontSize="xs">
-            Domingo, 01 Jan de 2023
-          </Text>
-        </View>
-        <Image
-          style={{
-            alignSelf: "center",
-            width: 172,
-            height: 140,
-            marginTop: 40,
-            marginBottom: 10,
-          }}
-          resizeMode="center"
-          source={rainingImg}
-        />
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{ textAlign: "center" }} fontSize="giant" variant="bold">
-            23
-          </Text>
-          <Text style={{ height: 80 }} fontSize="xxl">
-            º
-          </Text>
-        </View>
-
-        <Text style={{ textAlign: "center" }} color="gray100" fontSize="lg">
-          Chuva Moderada
+    <AppContainer>
+      <View>
+        <Text style={{ textAlign: "center" }} fontSize="sm">
+          A Coruña, Espanha
         </Text>
+        <Text style={{ textAlign: "center" }} color="gray100" fontSize="xs">
+          Domingo, 01 Jan de 2023
+        </Text>
+      </View>
+      <Image
+        style={{
+          alignSelf: "center",
+          width: 172,
+          height: 140,
+          marginTop: 40,
+          marginBottom: 10,
+        }}
+        resizeMode="center"
+        source={rainingImg}
+      />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Text style={{ textAlign: "center" }} fontSize="giant" variant="bold">
+          23
+        </Text>
+        <Text style={{ height: 80 }} fontSize="xxl">
+          º
+        </Text>
+      </View>
 
-        <WeatherDescription />
-      </AppContainer>
-    </ScrollView>
+      <Text style={{ textAlign: "center" }} color="gray100" fontSize="lg">
+        Chuva Moderada
+      </Text>
+
+      <WeatherDescription />
+      <TodayAndNextFiveDays />
+    </AppContainer>
   );
 };
 

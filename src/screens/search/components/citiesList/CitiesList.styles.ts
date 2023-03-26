@@ -7,8 +7,9 @@ export const CityCardContainer = styled.TouchableOpacity`
   width: ${cardWidth}px;
   height: 164px;
   border-radius: 20px;
-  margin: 10px 10px;
+  margin: 10px 25px 0 0;
   padding: 15px;
+  justify-content: space-between;
 `;
 export const CardHeader = styled.View`
   flex-direction: row;
