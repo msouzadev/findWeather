@@ -7,7 +7,8 @@
       "@styles/*": ["src/styles/*"],
       "@screens/*": ["src/screens/*"],
       "@assets/*": ["assets/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@navigation/*": ["src/navigation/*"]
     }
   }
 }

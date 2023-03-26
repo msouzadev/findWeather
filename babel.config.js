@@ -22,6 +22,7 @@ module.exports = function (api) {
             "@styles": "./src/styles",
             "@screens": "./src/screens",
             "@assets": "./assets",
+            "@navigation": "./src/navigation",
           },
         },
       ],
