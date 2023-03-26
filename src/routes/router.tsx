@@ -6,6 +6,8 @@ import { Octicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { theme } from "@styles/theme/theme";
 import { Platform } from "react-native";
+import Search from "@screens/search/Search";
+import Header from "@components/header/Header";
 
 const HomeTabs = createBottomTabNavigator();
 
@@ -16,7 +18,7 @@ interface RouterProps {
 }
 const HomeRoutes = () => (
   <HomeTabs.Navigator
-    // tabBar={() => <TabBar />}
+    initialRouteName="Search"
     screenOptions={{
       tabBarStyle: {
         backgroundColor: theme.colors.dark,
@@ -48,7 +50,7 @@ const HomeRoutes = () => (
     />
     <HomeTabs.Screen
       name="Search"
-      component={Home}
+      component={Search}
       options={{
         tabBarIcon: ({ focused }) => (
           <AntDesign

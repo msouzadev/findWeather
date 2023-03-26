@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 
-import { Container } from "./Home.styles";
-
 import Text from "@components/text/Text";
 import { Image } from "react-native";
 import { ScrollView } from "react-native";
 import { theme } from "@styles/theme/theme";
+import AppContainer from "@components/appContainer/AppContainer";
 
 const climateChangeImg = require("@assets/climate-change.png");
 const Home = () => {
@@ -19,7 +18,7 @@ const Home = () => {
         paddingBottom: 30,
       }}
     >
-      <Container>
+      <AppContainer>
         <Text fontSize="xxl" style={{ textAlign: "center" }}>
           Find
           <Text variant="bold" fontSize="xxl">
@@ -31,7 +30,7 @@ const Home = () => {
           source={climateChangeImg}
           style={{ alignSelf: "center", marginTop: 40 }}
         />
-      </Container>
+      </AppContainer>
 
       <Text color="gray100" fontSize="md" style={{ textAlign: "center" }}>
         Selecione aqui um local e{"\n"} encontre o clima em tempo real
