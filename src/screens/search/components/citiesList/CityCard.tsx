@@ -12,8 +12,9 @@ import { CardHeader, CityCardContainer } from "./CitiesList.styles";
 interface CityCardProps {
   index: number;
   data: City;
+  onPressCity: (city: string) => any;
 }
-const CityCard = ({ index, data }: CityCardProps) => {
+const CityCard = ({ index, data, onPressCity }: CityCardProps) => {
   const {
     doFetch: getForecast,
     data: forecastData,
@@ -24,9 +25,12 @@ const CityCard = ({ index, data }: CityCardProps) => {
   }, []);
 
   const hasData = !isEmpty(forecastData);
+  const handlePressCard = (city: string) => () => {
+    onPressCity(city);
+  };
   return (
     <Animated.View entering={SlideInRight.delay(index * 200)}>
-      <CityCardContainer>
+      <CityCardContainer onPress={handlePressCard(data.name)}>
         <CardHeader>
           <View>
             <Text fontSize="md" variant="bold">

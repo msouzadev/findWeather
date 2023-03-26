@@ -4,7 +4,7 @@ import TextInput from "@components/textInput/TextInput";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { LocationIconContainer } from "./Search.styles";
+import { Container, LocationIconContainer } from "./Search.styles";
 import CitiesList from "./components/citiesList/CitiesList";
 import useDebouncedCallback from "src/hooks/useDebounce";
 import { useFetch } from "@services/useFetch/useFetch";
@@ -45,7 +45,7 @@ const Search = () => {
   }, 500);
 
   return (
-    <AppContainer>
+    <Container>
       <Header title="Buscar" />
       <View style={{ flexDirection: "row", marginVertical: 30 }}>
         <TextInput
@@ -64,7 +64,7 @@ const Search = () => {
         data={searchResults}
         hasError={fetchError}
       />
-    </AppContainer>
+    </Container>
   );
 };
 

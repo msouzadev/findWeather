@@ -6,9 +6,18 @@ import { ScrollView } from "react-native";
 import { theme } from "@styles/theme/theme";
 import AppContainer from "@components/appContainer/AppContainer";
 import { RootStack } from "src/@types/router";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  useIsFocused,
+  useNavigation,
+} from "@react-navigation/native";
 import WeatherDescription from "./components/weatherDescription/WeatherDescription";
 import TodayAndNextFiveDays from "./components/todayAndNextFiveDays/TodayAndNextFiveDays";
+import { useFetch } from "@services/useFetch/useFetch";
+import { getItem } from "@utils/storage";
+import { WEATHER_API_URL, WEATHER_API_KEY } from "@env";
+import { ForecastResponse } from "src/@types/weather-api";
+import { isEmpty } from "@utils/empty";
 
 const climateChangeImg = require("@assets/climate-change.png");
 
@@ -54,19 +63,52 @@ const EmptyState = () => {
   );
 };
 const Home = () => {
-  const [isEmpty, setIsEmpty] = useState(false);
+  // const [isEmpty, setIsEmpty] = useState(false);
+  const [isLoadingCity, setIsLoadingCity] = useState(true);
+
+  const {
+    doFetch: getForecastDetails,
+    isFetching,
+    data: currentForecastData,
+  } = useFetch<ForecastResponse>("");
+
+  const isFocused = useIsFocused();
+  const getStoredCity = async () => {
+    const city = await getItem("city");
+    if (!!city) {
+      console.tron("request");
+      getForecastDetails(
+        { params: { q: city, lang: "pt", key: WEATHER_API_KEY } },
+        `${WEATHER_API_URL}/current.json`
+      );
+    }
+    console.log({ city });
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      getStoredCity();
+    }
+  }, [isFocused]);
   useEffect(() => {}, []);
-  if (isEmpty) {
+  if (isEmpty(currentForecastData) || isFetching) {
     return <EmptyState />;
   }
   return (
     <AppContainer>
       <View>
         <Text style={{ textAlign: "center" }} fontSize="sm">
-          A Coruña, Espanha
+          {currentForecastData.location.name},{" "}
+          {currentForecastData.location.country}
         </Text>
-        <Text style={{ textAlign: "center" }} color="gray100" fontSize="xs">
-          Domingo, 01 Jan de 2023
+        <Text
+          style={{ textAlign: "center", textTransform: "capitalize" }}
+          color="gray100"
+          fontSize="xs"
+        >
+          {new Intl.DateTimeFormat("pt-BR", { dateStyle: "full" }).format(
+            new Date(currentForecastData.location.localtime)
+          )}
         </Text>
       </View>
       <Image
@@ -88,7 +130,7 @@ const Home = () => {
         }}
       >
         <Text style={{ textAlign: "center" }} fontSize="giant" variant="bold">
-          23
+          {currentForecastData.current.temp_c}
         </Text>
         <Text style={{ height: 80 }} fontSize="xxl">
           º
@@ -96,7 +138,7 @@ const Home = () => {
       </View>
 
       <Text style={{ textAlign: "center" }} color="gray100" fontSize="lg">
-        Chuva Moderada
+        {currentForecastData.current.condition.text}
       </Text>
 
       <WeatherDescription />
