@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
 
 import Text from "@components/text/Text";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import { theme } from "@styles/theme/theme";
 import AppContainer from "@components/appContainer/AppContainer";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStack } from "src/@types/router";
 
 const climateChangeImg = require("@assets/climate-change.png");
-const Home = () => {
+const Home = ({ navigation }: NativeStackScreenProps<RootStack>) => {
   useEffect(() => {}, []);
+
+  const navigateToSearch = () => {
+    navigation.navigate("Search");
+  };
   return (
     <ScrollView
       style={{ backgroundColor: theme.colors.dark }}
@@ -32,9 +38,15 @@ const Home = () => {
         />
       </AppContainer>
 
-      <Text color="gray100" fontSize="md" style={{ textAlign: "center" }}>
-        Selecione aqui um local e{"\n"} encontre o clima em tempo real
-      </Text>
+      <TouchableOpacity onPress={navigateToSearch}>
+        <Text
+          color="gray100"
+          fontSize="md"
+          style={{ textAlign: "center", textDecorationLine: "underline" }}
+        >
+          Selecione aqui um local e{"\n"} encontre o clima em tempo real
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

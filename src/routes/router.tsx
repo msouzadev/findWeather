@@ -21,6 +21,7 @@ const HomeRoutes = () => (
     initialRouteName="Search"
     screenOptions={{
       tabBarStyle: {
+        borderTopWidth: 0,
         backgroundColor: theme.colors.dark,
       },
       tabBarItemStyle: {

@@ -8,7 +8,9 @@
       "@screens/*": ["src/screens/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["src/components/*"],
-      "@navigation/*": ["src/navigation/*"]
+      "@navigation/*": ["src/navigation/*"],
+      "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"]
     }
   }
 }

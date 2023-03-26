@@ -15,7 +15,9 @@ import { useState, useEffect, useCallback } from "react";
 import { Router } from "src/routes/router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+if (__DEV__) {
+  import("./ReactotronConfig");
+}
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -59,7 +61,7 @@ export default function App() {
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
         <NavigationContainer onReady={onLayoutRootView}>
-          <Router isFirstTimeOpen={isFirstTimeOpenApp} />
+          <Router isFirstTimeOpen={isFirstTimeOpenApp!} />
           <StatusBar style="light" />
         </NavigationContainer>
       </ThemeProvider>
